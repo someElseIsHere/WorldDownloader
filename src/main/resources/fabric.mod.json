@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "wdl",
+  "version": "${version}",
+  "name": "World Downloader",
+  "description": "World Downloader is a mod that allows making backups of Minecraft worlds.",
+  "authors": [
+    "Pokechu22",
+    "julialy (formerly nariol, cubic72)",
+    "thePlaceholder"
+  ],
+  "contact": {
+    "homepage": "https://github.com/someElseIsHere/WorldDownloader",
+    "sources": "https://github.com/someElseIsHere/WorldDownloader"
+  },
+  "license": "MMPLv2",
+  "icon": "assets/wdl/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [],
+    "client": [
+      "wdl.fabric.WDLFabricMod"
+    ]
+  },
+  "mixins": [
+    "wdl.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.21",
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

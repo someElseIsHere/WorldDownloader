@@ -12,37 +12,23 @@
  *
  * Do not redistribute (in modified or unmodified form) without prior permission.
  */
-package wdl.forge.mixin;
+package wdl.mixin;
 
+import net.minecraft.client.gui.screen.IngameMenuScreen;
+import net.minecraft.client.gui.screen.Screen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.world.World;
 import wdl.ducks.IBaseChangesApplied;
 
-@Mixin(ClientWorld.class)
-public abstract class MixinWorldClient extends World implements IBaseChangesApplied {
+@Mixin(IngameMenuScreen.class)
+public abstract class MixinGuiIngameMenu extends Screen implements IBaseChangesApplied {
 
-	protected MixinWorldClient() {
-		super(null, null, null, null, true, true, 0);
-	}
+	public MixinGuiIngameMenu() {super(null);}
 
-	@Inject(method="tick", at=@At("RETURN"))
-	private void onTick(CallbackInfo ci) {
-		//more up here
-		/* WDL >>> */
-		wdl.WDLHooks.onWorldClientTick((ClientWorld)(Object)this);
-		/* <<< WDL */
-	}
-
-	@Inject(method="removeEntityFromWorld", at=@At("HEAD"))
-	private void onRemoveEntityFromWorld(int p_73028_1_, CallbackInfo ci) {
-		/* WDL >>> */
-		wdl.WDLHooks.onWorldClientRemoveEntityFromWorld((ClientWorld)(Object)this, p_73028_1_);
-		/* <<< WDL */
-		//more down here
+	@Inject(method="init", at=@At("RETURN"))
+	private void onInitGui(CallbackInfo ci) {
+		wdl.WDLHooks.injectWDLButtons((IngameMenuScreen)(Object)this, buttons, this::addButton);
 	}
 }

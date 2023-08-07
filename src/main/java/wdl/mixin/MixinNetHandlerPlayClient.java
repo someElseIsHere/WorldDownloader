@@ -12,23 +12,18 @@
  *
  * Do not redistribute (in modified or unmodified form) without prior permission.
  */
-package wdl.forge.mixin;
+package wdl.mixin;
 
+import net.minecraft.client.network.play.ClientPlayNetHandler;
+import net.minecraft.client.network.play.IClientPlayNetHandler;
+import net.minecraft.client.world.ClientWorld;
+import net.minecraft.network.play.server.*;
+import net.minecraft.util.text.ITextComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import net.minecraft.client.network.play.ClientPlayNetHandler;
-import net.minecraft.client.network.play.IClientPlayNetHandler;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.network.play.server.SBlockActionPacket;
-import net.minecraft.network.play.server.SChatPacket;
-import net.minecraft.network.play.server.SCustomPayloadPlayPacket;
-import net.minecraft.network.play.server.SMapDataPacket;
-import net.minecraft.network.play.server.SUnloadChunkPacket;
-import net.minecraft.util.text.ITextComponent;
 import wdl.ducks.IBaseChangesApplied;
 
 @Mixin(ClientPlayNetHandler.class)

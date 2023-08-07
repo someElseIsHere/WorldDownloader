@@ -12,24 +12,33 @@
  *
  * Do not redistribute (in modified or unmodified form) without prior permission.
  */
-package wdl.forge.mixin;
+package wdl.mixin;
 
-import net.minecraft.client.gui.screen.IngameMenuScreen;
-import net.minecraft.client.gui.screen.Screen;
-import wdl.ducks.IBaseChangesApplied;
-
+import net.minecraft.crash.CrashReport;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import wdl.ducks.IBaseChangesApplied;
 
-@Mixin(IngameMenuScreen.class)
-public abstract class MixinGuiIngameMenu extends Screen implements IBaseChangesApplied {
-
-	public MixinGuiIngameMenu() {super(null);}
-
-	@Inject(method="init", at=@At("RETURN"))
-	private void onInitGui(CallbackInfo ci) {
-		wdl.WDLHooks.injectWDLButtons((IngameMenuScreen)(Object)this, buttons, this::addButton);
+@Mixin(CrashReport.class)
+public abstract class MixinCrashReport implements IBaseChangesApplied {
+	@Inject(method="populateEnvironment", at=@At("RETURN"))
+	private void onCrashReportPopulateEnvironment(CallbackInfo ci) {
+		try {
+			wdl.WDLHooks.onCrashReportPopulateEnvironment((CrashReport)(Object)this);
+		} catch (Throwable t) {
+			try {
+				final Logger LOGGER = LogManager.getLogger();
+				LOGGER.fatal("World Downloader: Failed to add crash info", t);
+				((CrashReport)(Object)this).getCategory().addCrashSectionThrowable("World Downloader - Fatal error in crash handler (see log)", t);
+			} catch (Throwable t2) {
+				System.err.println("WDL: Double failure adding info to crash report!");
+				t.printStackTrace();
+				t2.printStackTrace();
+			}
+		}
 	}
 }
