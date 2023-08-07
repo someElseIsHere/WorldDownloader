@@ -39,10 +39,7 @@ import net.minecraft.world.chunk.ChunkStatus;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.chunk.NibbleArray;
 import net.minecraft.world.chunk.UpgradeData;
-import net.minecraft.world.chunk.storage.ChunkLoader;
-import net.minecraft.world.chunk.storage.RegionFile;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.lighting.WorldLightManager;
+import net.minecraft.world.storage.VersionedChunkStorage;
 import wdl.config.settings.MiscSettings;
 import wdl.versioned.IDimensionWrapper;
 import wdl.versioned.ISaveHandlerWrapper;
@@ -54,7 +51,7 @@ import wdl.versioned.VersionedFunctions;
  *
  * This variant is used for chunks from 1.13 and later.
  */
-abstract class WDLChunkLoaderBase extends ChunkLoader {
+abstract class WDLChunkLoaderBase extends VersionedChunkStorage {
 
 	/**
 	 * Gets the save folder for the given WorldProvider, respecting Forge's
@@ -102,7 +99,7 @@ abstract class WDLChunkLoaderBase extends ChunkLoader {
 	 * Note that while the normal implementation swallows Exceptions, this
 	 * version does not.
 	 */
-	public synchronized void saveChunk(World world, IChunk chunk) throws Exception {
+	public synchronized void saveChunk(World world, Chunk chunk) throws Exception {
 		wdl.saveHandler.checkSessionLock();
 
 		CompoundNBT levelTag = writeChunkToNBT((Chunk)chunk, world);

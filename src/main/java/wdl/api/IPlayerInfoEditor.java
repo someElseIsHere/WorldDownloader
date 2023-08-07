@@ -13,8 +13,9 @@
  */
 package wdl.api;
 
-import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
+
+import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.nbt.NbtCompound;
 
 /**
  * {@link IWDLMod} that edits the player info NBT file.
@@ -28,9 +29,8 @@ public interface IPlayerInfoEditor extends IWDLMod {
 	 * @param saveHandler
 	 *            The current saveHandler ({@link wdl.WDL#saveHandler}).
 	 * @param tag
-	 *            The current {@link NBTTagCompound} that is being saved. Edit
+	 *            The current {@link } that is being saved. Edit
 	 *            or add info to this.
 	 */
-	public abstract void editPlayerInfo(ClientPlayerEntity player,
-			Object saveHandler, CompoundNBT tag);
+	public abstract void editPlayerInfo(ClientPlayerEntity player, Object saveHandler, NbtCompound tag);
 }

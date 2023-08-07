@@ -18,6 +18,7 @@ import java.util.function.Supplier;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import wdl.WDL;
@@ -55,7 +56,7 @@ public class GuiWDLSaveProgress extends GuiTurningCameraBase {
 	 * @param title The title.
 	 * @param taskCount The total number of major tasks that there will be.
 	 */
-	public GuiWDLSaveProgress(WDL wdl, ITextComponent title, int taskCount) {
+	public GuiWDLSaveProgress(WDL wdl, Text title, int taskCount) {
 		super(wdl, title);
 		this.majorTaskCount = taskCount;
 		this.majorTaskNumber = 0;

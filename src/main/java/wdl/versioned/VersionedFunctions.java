@@ -37,9 +37,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.ContainerBlock;
 import net.minecraft.client.GameSettings;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.network.play.ClientPlayNetHandler;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
@@ -49,6 +50,8 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.StringNBT;
 import net.minecraft.network.play.client.CCustomPayloadPacket;
 import net.minecraft.network.play.server.SChatPacket;
@@ -160,7 +163,7 @@ public final class VersionedFunctions {
 	 * @return The SaveHandler.
 	 * @throws Exception in some versions when e.g. an IO error occurs
 	 */
-	public static ISaveHandlerWrapper getSaveHandler(Minecraft minecraft, String worldName) throws Exception {
+	public static ISaveHandlerWrapper getSaveHandler(MinecraftClient minecraft, String worldName) throws Exception {
 		return HandlerFunctions.getSaveHandler(minecraft, worldName);
 	}
 
@@ -173,7 +176,7 @@ public final class VersionedFunctions {
 	 * @param player The player.
 	 * @param nbt The (partially already populated) nbt.
 	 */
-	public static void writeAdditionalPlayerData(ClientPlayerEntity player, CompoundNBT nbt) {
+	public static void writeAdditionalPlayerData(ClientPlayerEntity player, NbtCompound nbt) {
 		HandlerFunctions.writeAdditionalPlayerData(player, nbt);
 	}
 
@@ -184,7 +187,7 @@ public final class VersionedFunctions {
 	 * @param playerNBT The player's NBT data.
 	 * @return The world info NBT data.
 	 */
-	public static CompoundNBT getWorldInfoNbt(ClientWorld world, CompoundNBT playerNBT) {
+	public static NbtCompound getWorldInfoNbt(ClientWorld world, NbtCompound playerNBT) {
 		return HandlerFunctions.getWorldInfoNbt(world, playerNBT);
 	}
 
@@ -246,7 +249,7 @@ public final class VersionedFunctions {
 	 * @param tag The tag to use
 	 * @return The string version.
 	 */
-	public static String nbtString(INBT tag) {
+	public static String nbtString(NbtCompound tag) {
 		return NBTFunctions.nbtString(tag);
 	}
 
@@ -256,7 +259,7 @@ public final class VersionedFunctions {
 	 * @param values The varargs array of values.
 	 * @return A new list tag.
 	 */
-	public static ListNBT createFloatListTag(float... values) {
+	public static NbtList createFloatListTag(float... values) {
 		return NBTFunctions.createFloatListTag(values);
 	}
 
@@ -266,7 +269,7 @@ public final class VersionedFunctions {
 	 * @param values The varargs array of values.
 	 * @return A new list tag.
 	 */
-	public static ListNBT createDoubleListTag(double... values) {
+	public static NbtList createDoubleListTag(double... values) {
 		return NBTFunctions.createDoubleListTag(values);
 	}
 
@@ -465,7 +468,7 @@ public final class VersionedFunctions {
 	 *
 	 * @return The new GameRules object
 	 */
-	public static GameRules loadGameRules(CompoundNBT nbt) {
+	public static GameRules loadGameRules(NbtCompound nbt) {
 		return GameRuleFunctions.loadGameRules(nbt);
 	}
 
@@ -532,7 +535,7 @@ public final class VersionedFunctions {
 	 * @param generatorOptions Parameters for the generator
 	 * @param generatorVersion The generator's version (used for default_1_1)
 	 */
-	public static void writeGeneratorOptions(CompoundNBT worldInfoNBT, long randomSeed, boolean mapFeatures, String generatorName, String generatorOptions, int generatorVersion) {
+	public static void writeGeneratorOptions(NbtCompound worldInfoNBT, long randomSeed, boolean mapFeatures, String generatorName, String generatorOptions, int generatorVersion) {
 		GeneratorFunctions.writeGeneratorOptions(worldInfoNBT, randomSeed, mapFeatures, generatorName, generatorOptions, generatorVersion);
 	}
 

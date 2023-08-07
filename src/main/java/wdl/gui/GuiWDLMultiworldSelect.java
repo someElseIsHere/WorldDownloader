@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.text.Text;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -224,7 +225,7 @@ public class GuiWDLMultiworldSelect extends GuiTurningCameraBase {
 	 */
 	private String searchText = "";
 
-	public GuiWDLMultiworldSelect(WDL wdl, ITextComponent title, WorldSelectionCallback callback) {
+	public GuiWDLMultiworldSelect(WDL wdl, Text title, WorldSelectionCallback callback) {
 		super(wdl, title);
 
 		this.wdl = wdl;

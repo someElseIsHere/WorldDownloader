@@ -15,6 +15,7 @@ package wdl.api;
 
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.NbtCompound;
 
 /**
  * {@link IWDLMod} that edits the world info NBT file (level.dat).
@@ -34,5 +35,5 @@ public interface IWorldInfoEditor extends IWDLMod {
 	 *            or add info to this.
 	 */
 	public abstract void editWorldInfo(ClientWorld world, Object info,
-			Object saveHandler, CompoundNBT tag);
+			Object saveHandler, NbtCompound tag);
 }
